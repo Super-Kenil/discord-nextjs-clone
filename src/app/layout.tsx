@@ -5,7 +5,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import NextTopLoader from 'nextjs-toploader'
 
 import './globals.css'
-import { ThemeProvider } from '@/components'
+import { ClientSideProviders } from '@/components'
 
 const open_sans = Open_Sans({ subsets: ['latin'] })
 
@@ -18,20 +18,15 @@ export const metadata: Metadata = {
   }],
 }
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <ClerkProvider>
       <html lang="en">
         <body className={open_sans.className}>
-          <NextTopLoader showSpinner={false} />
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
+          <ClientSideProviders>
+            <NextTopLoader showSpinner={false} />
             {children}
-          </ThemeProvider>
+          </ClientSideProviders>
         </body>
       </html>
     </ClerkProvider>

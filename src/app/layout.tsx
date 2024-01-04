@@ -3,9 +3,9 @@ import { Open_Sans } from 'next/font/google'
 import { type ReactNode } from 'react'
 import { ClerkProvider } from '@clerk/nextjs'
 import NextTopLoader from 'nextjs-toploader'
+import { ClientSideProviders } from '@/components'
 
 import './globals.css'
-import { ClientSideProviders } from '@/components'
 
 const open_sans = Open_Sans({ subsets: ['latin'] })
 

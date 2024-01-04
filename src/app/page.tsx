@@ -1,19 +1,26 @@
-import { SignOutButton, UserButton } from "@clerk/nextjs";
+import { InitialModal } from "@/components/modals";
+import { getInitialProfile } from "@/helpers";
+import { db } from "@/utils";
+import { redirect } from "next/navigation";
 
-const Home = () => {
+const Home = async () => {
+  const profile = await getInitialProfile()
+
+  const server = await db.server.findFirst({
+    where: {
+      members: {
+        some: {
+          profileId: profile.id
+        }
+      }
+    }
+  })
+
+  if (server) return redirect(`/servers/${server.id}`)
+
+
   return (
-    <h1 className="text-cyan-500">
-      Hey there
-
-      <div className="mt-8">
-        <UserButton afterSignOutUrl="/auth/signi-in" />
-      </div>
-
-      <div className="mt-8">
-
-        <SignOutButton />
-      </div>
-    </h1>
+    <InitialModal />
   )
 }
 

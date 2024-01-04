@@ -2,13 +2,13 @@
 import { type ReactNode } from "react"
 import ThemeProvider from "./ThemeProvider"
 
-const ClientSideProviders = ({ children }: { children: ReactNode }) => {
+const ClientSideProviders = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="dark"
+      // defaultTheme="dark"
       // forcedTheme="dark"
-      storageKey="discord-theme-mode"
+      // storageKey="discord-theme-mode"
       // enableSystem
       // disableTransitionOnChange
     >

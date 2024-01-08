@@ -1,8 +1,10 @@
-"use client"
-import { type ReactNode } from "react"
-import ThemeProvider from "./ThemeProvider"
+'use client'
+import { type ReactNode } from 'react'
+import ThemeProvider from './ThemeProvider'
 
-const ClientSideProviders = ({ children }: Readonly<{ children: ReactNode }>) => {
+const ClientSideProviders = ({
+  children,
+}: Readonly<{ children: ReactNode }>) => {
   return (
     <ThemeProvider
       attribute="class"

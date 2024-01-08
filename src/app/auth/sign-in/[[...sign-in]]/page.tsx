@@ -1,8 +1,6 @@
-import { SignIn as ClerkSignIn } from "@clerk/nextjs";
+import { SignIn as ClerkSignIn } from '@clerk/nextjs'
 const SignIn = () => {
-  return (
-    <ClerkSignIn />
-  )
+  return <ClerkSignIn />
 }
 
 export default SignIn

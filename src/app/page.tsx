@@ -1,7 +1,7 @@
-import { InitialModal } from "@/components/modals";
-import { getInitialProfile } from "@/helpers";
-import { db } from "@/utils";
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation'
+import { InitialModal } from '@/components/modals'
+import { getInitialProfile } from '@/helpers'
+import { db } from '@/utils'
 
 const Home = async () => {
   const profile = await getInitialProfile()
@@ -10,18 +10,15 @@ const Home = async () => {
     where: {
       members: {
         some: {
-          profileId: profile.id
-        }
-      }
-    }
+          profileId: profile.id,
+        },
+      },
+    },
   })
 
   if (server) return redirect(`/servers/${server.id}`)
 
-
-  return (
-    <InitialModal />
-  )
+  return <InitialModal />
 }
 
-export default Home;
+export default Home

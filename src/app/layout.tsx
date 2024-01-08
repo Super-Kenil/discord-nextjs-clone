@@ -11,17 +11,22 @@ const open_sans = Open_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Discord',
-  description: 'Discord Clone creted with Nextjs, Typescript, shadcn, tailwindcss, Socket.io, Prisma, MySQL',
-  authors: [{
-    name: 'Super-Kenil',
-    url: 'https://github.com/Super-Kenil/'
-  }],
+  description:
+    'Discord Clone creted with Nextjs, Typescript, shadcn, tailwindcss, Socket.io, Prisma, MySQL',
+  authors: [
+    {
+      name: 'Super-Kenil',
+      url: 'https://github.com/Super-Kenil/',
+    },
+  ],
 }
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={open_sans.className}>
           <ClientSideProviders>
             <NextTopLoader showSpinner={false} />

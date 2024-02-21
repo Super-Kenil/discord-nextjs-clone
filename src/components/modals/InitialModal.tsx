@@ -23,6 +23,12 @@ import {
 } from '@/components/ui'
 import { FileUpload } from '@/components'
 import { useRouter } from 'next/navigation'
+import { onSubmit } from './initial-modal-action'
+
+export const newServerSchema = z.object({
+  name: z.string().min(2, { message: 'Server name is required' }),
+  imageUrl: z.string().min(2, { message: 'Server image is required' }),
+})
 
 const InitialModal = () => {
 
@@ -33,10 +39,7 @@ const InitialModal = () => {
     setIsMounted(true)
   }, [])
 
-  const newServerSchema = z.object({
-    name: z.string().min(2, { message: 'Server name is required' }),
-    imageUrl: z.string().min(2, { message: 'Server image is required' }),
-  })
+
 
   const form = useForm({
     defaultValues: {
@@ -48,17 +51,50 @@ const InitialModal = () => {
 
   const isLoading = form.formState.isSubmitting
 
+  // const handleServerSubmit = async (values: z.infer<typeof newServerSchema>) => {
+  //   Promise.all([onSubmit(values)]).then(() => {
+  //     form.reset()
+  //     router.refresh()
+  //   })
+  // }
+
+  // const onSubmit = async (values: z.infer<typeof newServerSchema>) => {
+  //   "use server"
+  //   try {
+  //     const response = await fetch('/api/servers', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: await JSON.stringify(values)
+  //     })
+  //     console.log('response after submission', response)
+  //     form.reset()
+  //     router.refresh()
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
+
   const onSubmit = async (values: z.infer<typeof newServerSchema>) => {
     try {
-      await axios.post('/api/servers', values)
-
+      const response = await fetch('/api/servers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: await JSON.stringify(values)
+      })
+      console.log('response after submission', response)
       form.reset()
       router.refresh()
+      window.location.reload()
     } catch (error) {
       console.error(error)
     }
   }
 
+  // await axios.post('/api/servers', values)
   if (!isMounded) return null
 
   return (

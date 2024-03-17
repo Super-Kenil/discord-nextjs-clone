@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import NavigationAction from './NavigationAction'
 import { Separator } from '../ui/separator'
 import { ScrollArea } from '../ui/scroll-area'
+import NavigationItem from './NavigationItem'
 
 const NavigationSideBar = async () => {
   const profile = await currentProfile()
@@ -21,8 +22,8 @@ const NavigationSideBar = async () => {
       <Separator className='h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto' />
       <ScrollArea className='flex-1 w-full'>
         {servers.map((server) => (
-          <div key={server.id}>
-            {server.name}
+          <div key={server.id} className="mb-4">
+            <NavigationItem item={server} />
           </div>
         ))}
       </ScrollArea>

@@ -1,7 +1,7 @@
 "use client"
 
 import type { ReactNode } from 'react'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui'
 import type { Side, Align } from '@radix-ui/react-popper'
 
 type ActionTooltipProps = {

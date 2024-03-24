@@ -1,9 +1,10 @@
 import { currentProfile, db } from '@/utils'
 import { redirect } from 'next/navigation'
 import NavigationAction from './NavigationAction'
-import { Separator } from '../ui/separator'
-import { ScrollArea } from '../ui/scroll-area'
 import NavigationItem from './NavigationItem'
+import ModeToggle from '../ModeToggle'
+import { ScrollArea, Separator } from '../ui'
+import { UserButton } from '@clerk/nextjs'
 
 const NavigationSideBar = async () => {
   const profile = await currentProfile()
@@ -21,14 +22,24 @@ const NavigationSideBar = async () => {
       <NavigationAction />
       <Separator className='h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto' />
       <ScrollArea className='flex-1 w-full'>
+
         {servers.map((server) => (
           <div key={server.id} className="mb-4">
-            <NavigationItem item={server} />
+            <NavigationItem {...server} />
           </div>
         ))}
+
       </ScrollArea>
       <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
-
+        <ModeToggle />
+        <UserButton
+          afterSignOutUrl='/'
+          appearance={{
+            elements: {
+              avatarBox: 'size-12'
+            }
+          }}
+        />
       </div>
     </div>
   )
